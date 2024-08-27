@@ -23,13 +23,14 @@ function createTaskStore() {
 
   return {
     subscribe,
-    addTask: (name: string, tags: string[] = [], duration: number = 0) => {
+    addTask: (name: string, description: string, tags: string[] = [], duration: number = 0) => {
       const newTask: Task = {
         id: Date.now().toString(),
         name,
+        description,
         duration,
         tags,
-        createdAt: new Date().toISOString() // Store as ISO string
+        createdAt: new Date().toISOString()
       };
       update(tasks => {
         const updatedTasks = [...tasks, newTask];

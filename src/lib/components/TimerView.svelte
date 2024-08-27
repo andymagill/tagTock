@@ -10,6 +10,7 @@
   let timerState: TimerState;
   let intervalId: number | null = null;
   let availableTags = ['Work', 'Personal', 'Study', 'Exercise', 'Reading'];
+  let taskDescription = '';
 
   const unsubscribe = timerStore.subscribe(value => {
     timerState = value;
@@ -46,13 +47,15 @@
   function finishTask() {
     pauseTimer();
     if (currentTask && elapsedTime > 0) {
-      taskStore.addTask(currentTask, selectedTags, elapsedTime);
+      taskStore.addTask(currentTask, taskDescription, selectedTags, elapsedTime);
       timerStore.resetTimer();
+      taskDescription = '';
     }
   }
 
-  function handleTaskInput(event: CustomEvent<string>) {
-    timerStore.setTask(event.detail);
+  function handleTaskInput(event: CustomEvent<{ name: string; description: string }>) {
+    timerStore.setTask(event.detail.name);
+    taskDescription = event.detail.description;
   }
 
   function handleTagChange(event: CustomEvent<string[]>) {
@@ -72,11 +75,12 @@
 </script>
 
 <section>
+  <h1>TagTock Timer</h1>
+
   <div class="timer-container">
     <div class="timer-display">
       <time datetime={formatTime(elapsedTime)}>{formatTime(elapsedTime)}</time>
     </div>
-    
     <div class="timer-controls">
       {#if isRunning}
         <button on:click={pauseTimer} transition:slide|local={{ duration: 300 }}>Pause</button>
@@ -90,7 +94,8 @@
   </div>
 
   <TaskInput 
-    value={currentTask} 
+    name={currentTask}
+    description={taskDescription}
     on:input={handleTaskInput}
   />
 
@@ -103,6 +108,7 @@
   {#if currentTask}
     <div class="current-task">
       <h3>Current Task: {currentTask}</h3>
+      <p>Description: {taskDescription || 'No description'}</p>
       <p>Tags: {selectedTags.join(', ') || 'None'}</p>
     </div>
   {/if}
@@ -126,6 +132,14 @@
   .timer-display {
     font-size: 3rem;
     text-align: center;
+  }
+
+  .timer-display time {
+    font-family: monospace;
+    background-color: #f0f0f0;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    display: inline-block;
   }
 
   .timer-controls {

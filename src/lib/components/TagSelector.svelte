@@ -50,7 +50,7 @@
   
 	button:hover:not(:disabled),
 	button:focus:not(:disabled) {
-	  background-color: #f0f0f0;
+	  background-color: #6eb4ff;
 	}
   
 	button.selected {

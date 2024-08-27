@@ -15,6 +15,7 @@ declare namespace App {
 export interface Task {
 	id: string;
 	name: string;
+    description: string;
 	duration: number;
 	tags: string[];
 	createdAt: string;

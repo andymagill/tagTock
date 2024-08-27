@@ -56,8 +56,9 @@
             class="task-details" 
             transition:slide
           >
-            <p>Created: {formatDate(task.createdAt)}</p>
-            <p>Tags: {task.tags.join(', ') || 'None'}</p>
+            <p><strong>Description:</strong> {task.description || 'No description provided'}</p>
+            <p><strong>Created:</strong> {formatDate(task.createdAt)}</p>
+            <p><strong>Tags:</strong> {task.tags.join(', ') || 'None'}</p>
             <button on:click={() => deleteTask(task.id)}>Delete Task</button>
           </div>
         {/if}
