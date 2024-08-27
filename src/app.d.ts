@@ -17,7 +17,7 @@ export interface Task {
 	name: string;
 	duration: number;
 	tags: string[];
-	createdAt: Date;
+	createdAt: string;
 }
 
 interface Tag {

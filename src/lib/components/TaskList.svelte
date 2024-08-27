@@ -8,19 +8,12 @@
   let expandedTaskId: string | null = null;
 
   onMount(() => {
-    console.log('TaskList component mounted');
     const unsubscribe = taskStore.subscribe(value => {
-      console.log('taskStore updated:', value);
       tasks = value;
-      console.log('tasks after update:', tasks);
     });
 
     return unsubscribe;
   });
-
-  $: {
-    console.log('tasks reactively updated:', tasks);
-  }
 
   function formatDuration(ms: number): string {
     const seconds = Math.floor(ms / 1000) % 60;
@@ -29,8 +22,8 @@
     return `${hours}h ${minutes}m ${seconds}s`;
   }
 
-  function formatDate(date: string | Date): string {
-    return new Date(date).toLocaleString();
+  function formatDate(dateString: string): string {
+    return new Date(dateString).toLocaleString();
   }
 
   function toggleTaskExpansion(taskId: string) {
