@@ -12,7 +12,7 @@ declare namespace App {
 }
 
 // Define your custom types here
-interface Task {
+export interface Task {
 	id: string;
 	name: string;
 	duration: number;
@@ -25,10 +25,11 @@ interface Tag {
 	name: string;
 }
 
-interface Timer {
-	isRunning: boolean;
-	startTime: number | null;
-	elapsedTime: number;
+export interface TimerState {
+    isRunning: boolean;
+    startTime: number | null;
+    elapsedTime: number;
+    currentTask: string;
+    selectedTags: string[];
+    lastUpdated: number;
 }
-
-export {};
