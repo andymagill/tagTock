@@ -1,11 +1,18 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { taskStore } from '$lib/stores/taskStore';
+  import { timerStore } from '$lib/stores/timerStore';
   import { fade, slide } from 'svelte/transition';
   import type { Task } from '../../app';
 
+  export let filterTag: string = '';
+
   let tasks: Task[] = [];
   let expandedTaskId: string | null = null;
+
+  $: filteredTasks = filterTag
+    ? tasks.filter(task => task.tags.includes(filterTag))
+    : tasks;
 
   onMount(() => {
     const unsubscribe = taskStore.subscribe(value => {
@@ -33,13 +40,26 @@
   function deleteTask(taskId: string) {
     taskStore.deleteTask(taskId);
   }
+
+  function copyTask(task: Task) {
+    timerStore.setTask(task.name);
+    timerStore.setDescription(task.description);
+    timerStore.setTags(task.tags);
+    alert('Task copied to timer view!');
+  }
 </script>
 
 <div class="task-list">
-  {#if tasks.length === 0}
+  <div class="task-header">
+    <span class="task-name">Task Name</span>
+    <span class="task-duration">Duration</span>
+    <span class="task-date">Start Date</span>
+  </div>
+
+  {#if filteredTasks.length === 0}
     <p>No tasks recorded yet.</p>
   {:else}
-    {#each tasks as task (task.id)}
+    {#each filteredTasks as task (task.id)}
       <div class="task-item" transition:fade>
         <button
           class="task-summary"
@@ -49,6 +69,7 @@
         >
           <span class="task-name">{task.name}</span>
           <span class="task-duration">{formatDuration(task.duration)}</span>
+          <span class="task-date">{formatDate(task.createdAt)}</span>
         </button>
         {#if expandedTaskId === task.id}
           <div 
@@ -56,10 +77,14 @@
             class="task-details" 
             transition:slide
           >
-            <p><strong>Description:</strong> {task.description || 'No description provided'}</p>
-            <p><strong>Created:</strong> {formatDate(task.createdAt)}</p>
-            <p><strong>Tags:</strong> {task.tags.join(', ') || 'None'}</p>
-            <button on:click={() => deleteTask(task.id)}>Delete Task</button>
+            <div class="task-info">
+              <p><strong>Description:</strong> {task.description || 'No description provided'}</p>
+              <p><strong>Tags:</strong> {task.tags.join(', ') || 'None'}</p>
+            </div>
+            <div class="task-actions">
+              <button on:click={() => copyTask(task)}>Copy</button>
+              <button on:click={() => deleteTask(task.id)}>Delete</button>
+            </div>
           </div>
         {/if}
       </div>
@@ -69,32 +94,45 @@
 
 <style>
   .task-list {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
   }
 
-  .task-item {
+  .task-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+    font-weight: bold;
     background-color: #f0f0f0;
-    border-radius: 4px;
-    margin-bottom: 1rem;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .task-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-top: none;
     overflow: hidden;
   }
 
   .task-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
     width: 100%;
     padding: 1rem;
     background-color: transparent;
     border: none;
     text-align: left;
     cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
   }
 
   .task-summary:hover,
   .task-summary:focus {
-    background-color: #e0e0e0;
+    background-color: #f8f8f8;
     outline: none;
   }
 
@@ -103,25 +141,44 @@
   }
 
   .task-details {
+    display: flex;
+    justify-content: space-between;
     padding: 1rem;
-    background-color: #ffffff;
+    background-color: #f8f8f8;
     border-top: 1px solid #e0e0e0;
   }
 
-  button {
+  .task-info {
+    flex-grow: 1;
+    padding-right: 1rem;
+  }
+
+  .task-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 100px;
+  }
+
+  .task-actions button {
     cursor: pointer;
-  }
-
-  .task-details button {
-    background-color: #ff4136;
-    color: white;
-    border: none;
     padding: 0.5rem 1rem;
+    border: none;
     border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.2s;
   }
 
-  .task-details button:hover,
-  .task-details button:focus {
-    background-color: #ff1a1a;
+  .task-actions button:hover {
+    background-color: #0056b3;
+  }
+
+  .task-actions button:last-child {
+    background-color: #dc3545;
+  }
+
+  .task-actions button:last-child:hover {
+    background-color: #c82333;
   }
 </style>

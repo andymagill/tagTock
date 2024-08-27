@@ -1,18 +1,35 @@
 <script lang="ts">
   import TaskList from '$lib/components/TaskList.svelte';
+  import FilterControls from '$lib/components/FilterControls.svelte';
+  import { taskStore } from '$lib/stores/taskStore';
+  import { onMount } from 'svelte';
+
+  let availableTags: string[] = [];
+  let selectedTag: string = '';
+
+  onMount(() => {
+    const unsubscribe = taskStore.subscribe(tasks => {
+      availableTags = [...new Set(tasks.flatMap(task => task.tags))];
+    });
+
+    return unsubscribe;
+  });
 </script>
 
 <svelte:head>
   <title>TagTock - Task History</title>
 </svelte:head>
 
-<main>
+<section>
   <h1>Task History</h1>
-  <TaskList />
-</main>
+
+  <FilterControls {availableTags} bind:selectedTag />
+
+  <TaskList filterTag={selectedTag} />
+</section>
 
 <style>
-  main {
+  section {
     max-width: 800px;
     margin: 0 auto;
     padding: 1rem;

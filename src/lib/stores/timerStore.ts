@@ -7,28 +7,19 @@ const initialState: TimerState = {
     startTime: null,
     elapsedTime: 0,
     currentTask: '',
+    currentDescription: '',
     selectedTags: [],
     lastUpdated: Date.now()
 };
 
 function createTimerStore() {
-    const { subscribe, set, update } = writable<TimerState>(initialState);
+    const { subscribe, set, update } = writable<TimerState>(loadTimerState());
 
     function loadTimerState(): TimerState {
         if (browser) {
             const savedState = localStorage.getItem('tagTockTimerState');
             if (savedState) {
-                const parsedState: TimerState = JSON.parse(savedState);
-                const now = Date.now();
-                const timePassed = now - parsedState.lastUpdated;
-                
-                if (parsedState.isRunning) {
-                    parsedState.elapsedTime += timePassed;
-                    parsedState.startTime = now - parsedState.elapsedTime;
-                }
-                
-                parsedState.lastUpdated = now;
-                return parsedState;
+                return JSON.parse(savedState);
             }
         }
         return initialState;
@@ -40,12 +31,12 @@ function createTimerStore() {
         }
     }
 
-    if (browser) {
-        set(loadTimerState());
-    }
-
     return {
         subscribe,
+        set: (state: TimerState) => {
+            set(state);
+            saveTimerState(state);
+        },
         startTimer: () => update(state => {
             if (!state.isRunning) {
                 const now = Date.now();
@@ -65,16 +56,11 @@ function createTimerStore() {
             }
             return state;
         }),
-        resetTimer: () => update(state => {
-            state.isRunning = false;
-            state.startTime = null;
-            state.elapsedTime = 0;
-            state.currentTask = '';
-            state.selectedTags = [];
-            state.lastUpdated = Date.now();
-            saveTimerState(state);
-            return state;
-        }),
+        resetTimer: () => {
+            const resetState = { ...initialState, lastUpdated: Date.now() };
+            set(resetState);
+            saveTimerState(resetState);
+        },
         updateElapsedTime: () => update(state => {
             if (state.isRunning) {
                 const now = Date.now();
@@ -86,6 +72,11 @@ function createTimerStore() {
         }),
         setTask: (task: string) => update(state => {
             state.currentTask = task;
+            saveTimerState(state);
+            return state;
+        }),
+        setDescription: (description: string) => update(state => {
+            state.currentDescription = description;
             saveTimerState(state);
             return state;
         }),

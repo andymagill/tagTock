@@ -31,6 +31,7 @@ export interface TimerState {
     startTime: number | null;
     elapsedTime: number;
     currentTask: string;
+    currentDescription: string;
     selectedTags: string[];
     lastUpdated: number;
 }
