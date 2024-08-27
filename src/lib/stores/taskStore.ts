@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { browser } from '$app/environment';
 
 interface Task {
     id: string;
@@ -12,12 +13,17 @@ function createTaskStore() {
     const { subscribe, set, update } = writable<Task[]>(loadTasks());
 
     function loadTasks(): Task[] {
-        const storedTasks = localStorage.getItem('tagTockTasks');
-        return storedTasks ? JSON.parse(storedTasks) : [];
+        if (browser) {
+            const storedTasks = localStorage.getItem('tagTockTasks');
+            return storedTasks ? JSON.parse(storedTasks) : [];
+        }
+        return [];
     }
 
     function saveTasks(tasks: Task[]) {
-        localStorage.setItem('tagTockTasks', JSON.stringify(tasks));
+        if (browser) {
+            localStorage.setItem('tagTockTasks', JSON.stringify(tasks));
+        }
     }
 
     return {
@@ -54,7 +60,9 @@ function createTaskStore() {
         },
         clearTasks: () => {
             set([]);
-            localStorage.removeItem('tagTockTasks');
+            if (browser) {
+                localStorage.removeItem('tagTockTasks');
+            }
         },
         getTotalDuration: () => {
             const tasks = loadTasks();
