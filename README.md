@@ -13,8 +13,6 @@ This project uses Vite and Svelte Kit for development and building. Below are br
 
 ## Building
 `npm run build`: Create a production build of the application using Vite.
-
-## Preview
 `npm run preview`: Preview the production build.
 
 ## Type Checking
