@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
+  import { fade, slide } from 'svelte/transition';
   import { timerStore } from '$lib/stores/timerStore';
   import { taskStore } from '$lib/stores/taskStore';
   import TaskInput from '$lib/components/TaskInput.svelte';
@@ -71,19 +72,21 @@
 </script>
 
 <section>
-  <h1>TagTock Timer</h1>
-
-  <div class="timer-display">
-    <h2>{formatTime(elapsedTime)}</h2>
-  </div>
-
-  <div class="timer-controls">
-    {#if isRunning}
-      <button on:click={pauseTimer}>Pause</button>
-    {:else}
-      <button on:click={startTimer}>Start</button>
-    {/if}
-    <button on:click={finishTask} disabled={!canFinish}>Finish</button>
+  <div class="timer-container">
+    <div class="timer-display">
+      <time datetime={formatTime(elapsedTime)}>{formatTime(elapsedTime)}</time>
+    </div>
+    
+    <div class="timer-controls">
+      {#if isRunning}
+        <button on:click={pauseTimer} transition:slide|local={{ duration: 300 }}>Pause</button>
+      {:else}
+        <button on:click={startTimer} transition:slide|local={{ duration: 300 }}>Start</button>
+      {/if}
+      {#if canFinish}
+        <button on:click={finishTask} transition:slide|local={{ duration: 300 }}>Finish</button>
+      {/if}
+    </div>
   </div>
 
   <TaskInput 
@@ -112,23 +115,38 @@
     padding: 1rem;
   }
 
+  .timer-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
   .timer-display {
-    font-size: 2rem;
+    font-size: 3rem;
     text-align: center;
-    margin: 2rem 0;
   }
 
   .timer-controls {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover:not(:disabled) {
+    background-color: #0056b3;
   }
 
   button:disabled {
