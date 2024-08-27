@@ -14,6 +14,5 @@
 		padding: 1rem;
 		position: relative;
 		bottom: 0;
-		width: 100%;
 	}
 </style>

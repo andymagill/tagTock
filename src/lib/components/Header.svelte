@@ -6,8 +6,11 @@
 </script>
 
 <header class="header">
-	<h1>{title}</h1>
-	<!-- TODO: change to logo -->
+	<div class="logo">
+		<img src="/clock-logo.svg" alt="TagTock Logo" width="50" height="50" />
+		<h1>{title}</h1>
+	</div>
+
 	<nav>
 		<ul>
 			<li><a href="/" on:click|preventDefault={() => goto('/')}>Timer</a></li>
@@ -19,10 +22,17 @@
 
 <style>
 	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+
 		background-color: #4caf50;
 		color: white;
-		padding: 1rem;
 		text-align: center;
+	}
+	.logo h1 {
+		display: inline-block;
 	}
 
 	nav ul {
