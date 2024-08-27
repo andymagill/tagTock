@@ -7,6 +7,7 @@
 
 <header class="header">
 	<h1>{title}</h1>
+	<!-- TODO: change to logo -->
 	<nav>
 		<ul>
 			<li><a href="/" on:click|preventDefault={() => goto('/')}>Timer</a></li>
