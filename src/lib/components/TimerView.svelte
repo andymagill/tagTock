@@ -20,7 +20,7 @@
   $: selectedTags = timerState?.selectedTags ?? [];
   $: isRunning = timerState?.isRunning ?? false;
   $: elapsedTime = timerState?.elapsedTime ?? 0;
-  $: canFinish = currentTask.trim() !== '' && elapsedTime > 0;
+  $: canArchive = currentTask.trim() !== '' && elapsedTime > 0;
 
   function formatTime(ms: number): string {
     const seconds = Math.floor(ms / 1000) % 60;
@@ -44,7 +44,7 @@
     }
   }
 
-  function finishTask() {
+  function archiveTask() {
     pauseTimer();
     if (currentTask && elapsedTime > 0) {
       taskStore.addTask(currentTask, taskDescription, selectedTags, elapsedTime);
@@ -87,8 +87,8 @@
       {:else}
         <button on:click={startTimer} transition:slide|local={{ duration: 300 }}>Start</button>
       {/if}
-      {#if canFinish}
-        <button on:click={finishTask} transition:slide|local={{ duration: 300 }}>Finish</button>
+      {#if canArchive}
+        <button on:click={archiveTask} transition:slide|local={{ duration: 300 }}>Archive</button>
       {/if}
     </div>
   </div>

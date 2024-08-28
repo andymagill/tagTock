@@ -17,11 +17,11 @@
 </script>
 
 <svelte:head>
-  <title>TagTock - Task History</title>
+  <title>TagTock - Archive</title>
 </svelte:head>
 
 <section>
-  <h1>Task History</h1>
+  <h1>Task Archive</h1>
 
   <FilterControls {availableTags} bind:selectedTag />
 

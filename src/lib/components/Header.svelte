@@ -16,7 +16,7 @@
 	<nav>
 		<ul>
 			<li><a href="/" on:click|preventDefault={() => goto('/')}>Timer</a></li>
-			<li><a href="/history" on:click|preventDefault={() => goto('/history')}>History</a></li>
+			<li><a href="/archive" on:click|preventDefault={() => goto('/Archive')}>Archive</a></li>
 			<li><a href="/reports" on:click|preventDefault={() => goto('/reports')}>Reports</a></li>
 		</ul>
 	</nav>
@@ -27,7 +27,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 1rem;
+		padding: 0.5rem 1rem;
 
 		background-color: #4caf50;
 		color: white;
