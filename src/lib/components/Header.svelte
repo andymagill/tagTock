@@ -39,6 +39,14 @@
 		font-size: 2rem;
 		font-weight: bold;
 	}
+	a {
+		display: inline-flex;
+		align-items: center;
+		color: white;
+		text-decoration: none;
+		gap: 0.5em;
+	}
+
 
 	nav ul {
 		list-style-type: none;

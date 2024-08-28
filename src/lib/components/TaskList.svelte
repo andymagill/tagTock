@@ -5,6 +5,7 @@
   import { fade, slide } from 'svelte/transition';
   import type { Task } from '../../app';
   import Modal from './Modal.svelte';
+  import { goto } from '$app/navigation';
 
   export let filterTag: string = '';
 
@@ -55,8 +56,8 @@
   }
 
   function confirmCopy(task: Task) {
-    modalTitle = 'Confirm Copy';
-    modalMessage = 'Are you sure you want to copy this task to the timer?';
+    modalTitle = 'Replace Current Timer';
+    modalMessage = 'Are you sure you want to copy this task to the current timer?';
     modalAction = () => copyTask(task);
     showModal = true;
   }
@@ -66,7 +67,7 @@
     timerStore.setDescription(task.description);
     timerStore.setTags(task.tags);
     showModal = false;
-    alert('Task copied to timer view!');
+    goto('/');
   }
 
   function handleModalClose() {
@@ -110,7 +111,7 @@
           <span class="task-duration">{formatDuration(task.duration)}</span>
           <span class="task-date">{formatDate(task.createdAt)}</span>
         </button>
-        
+
         {#if expandedTaskId === task.id}
           <div 
             id={`task-details-${task.id}`}
