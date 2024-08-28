@@ -21,6 +21,7 @@
   <style>
     .filter-controls {
       margin-bottom: 1rem;
+      text-align: right;
     }
   
     label {
