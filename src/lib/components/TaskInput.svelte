@@ -1,34 +1,42 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-  
+	import { createEventDispatcher, afterUpdate } from 'svelte';
+	
 	export let name: string = '';
 	export let description: string = '';
-  
+	
 	const dispatch = createEventDispatcher<{
 	  input: { name: string; description: string };
 	}>();
-  
-	function handleInput() {
+	
+	function handleNameInput() {
 	  dispatch('input', { name, description });
 	}
-  </script>
   
+	function handleDescriptionInput() {
+	  dispatch('input', { name, description });
+	}
+  
+	afterUpdate(() => {
+	  console.log('TaskInput updated:', { name, description }); // Debug log
+	});
+  </script>
+	
   <div class="task-input">
 	<input
 	  type="text"
 	  bind:value={name}
-	  on:input={handleInput}
+	  on:input={handleNameInput}
 	  placeholder="Enter task name"
 	/>
 	<textarea
 	  bind:value={description}
-	  on:input={handleInput}
+	  on:input={handleDescriptionInput}
 	  placeholder="Enter task description"
 	  rows="3"
 	></textarea>
   </div>
   
-  <style>
+<style>
 	.task-input {
 	  display: flex;
 	  flex-direction: column;
@@ -46,4 +54,4 @@
 	textarea {
 	  resize: vertical;
 	}
-  </style>
+</style>

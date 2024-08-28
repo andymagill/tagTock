@@ -1,6 +1,6 @@
 <script lang="ts">
 	import config from '$lib/config';
-	import TimerView from '$lib/components/TimerView.svelte';
+	import TimerContainer from '$lib/components/TimerContainer.svelte';
 </script>
 
 
@@ -10,7 +10,7 @@
 
 <main>
 	<h1>{$config.appDescription}</h1>
-	<TimerView />
+	<TimerContainer />
 </main>
 
 <style>
