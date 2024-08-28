@@ -19,7 +19,7 @@
   let isLoading = true;
 
   const displayedTime = tweened(0, {
-    duration: 2000,
+    duration: 1250,
     easing: cubicOut
   });
   
@@ -27,6 +27,11 @@
     timerState = value;
     isLoading = false;
     displayedTime.set(value.elapsedTime);
+    
+    // Start the interval if the timer is running
+    if (value.isRunning && !intervalId) {
+      startInterval();
+    }
   });
 
   $: currentTask = timerState?.currentTask ?? '';
@@ -42,12 +47,16 @@
     const hours = Math.floor(ms / (1000 * 60 * 60));
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
+  
+  function startInterval() {
+    intervalId = setInterval(() => {
+      timerStore.updateElapsedTime();
+    }, 1000);
+  }
 
   function startTimer() {
     timerStore.startTimer();
-    if (!intervalId) {
-      intervalId = setInterval(() => timerStore.updateElapsedTime(), 1000);
-    }
+    startInterval();
   }
 
   function pauseTimer() {
@@ -83,10 +92,7 @@
 
   onMount(() => {
     if (isRunning) {
-      intervalId = setInterval(() => {
-        timerStore.updateElapsedTime();
-        displayedTime.set(timerState.elapsedTime);
-      }, 1000);
+      startInterval();
     }
   });
 

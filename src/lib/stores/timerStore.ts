@@ -17,10 +17,18 @@ function createTimerStore() {
 
     function loadTimerState(): TimerState {
         if (browser) {
-            const savedState = localStorage.getItem('tagTockTimerState');
-            if (savedState) {
-                return JSON.parse(savedState);
+          const savedState = localStorage.getItem('tagTockTimerState');
+          if (savedState) {
+            const parsedState = JSON.parse(savedState);
+            // If the timer was running when last saved, calculate the elapsed time
+            if (parsedState.isRunning && parsedState.startTime) {
+              const now = Date.now();
+              parsedState.elapsedTime += now - parsedState.lastUpdated;
+              parsedState.startTime = now - parsedState.elapsedTime;
+              parsedState.lastUpdated = now;
             }
+            return parsedState;
+          }
         }
         return initialState;
     }
