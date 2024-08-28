@@ -18,7 +18,7 @@
 			<ul>
 				<li><a href="/" on:click|preventDefault={() => goto('/')}>Timer</a></li>
 				<li><a href="/archive" on:click|preventDefault={() => goto('/archive')}>Archive</a></li>
-				<li><a href="/reports" on:click|preventDefault={() => goto('/reports')}>Reports</a></li>
+				<li><a href="/reports" on:click|preventDefault={() => goto('/charts')}>Charts</a></li>
 			</ul>
 		</nav>
 	</div>
