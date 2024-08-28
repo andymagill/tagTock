@@ -5,7 +5,15 @@
 
 <footer class="footer">
 	<div class="wrapper">
-		<p>&copy; {year} {$config.appName}. All rights reserved.</p>
+		<nav>
+			<ul>
+				<li><a href="/about">About</a></li>
+				<li><a href="/privacy">Privacy</a></li>
+				<li><a href="/contact">Contact</a></li>
+			</ul>
+		</nav>
+
+		<p class="copyright">&copy; {year} {$config.appName}. All rights reserved.</p>
 	</div>
 </footer>
 
@@ -21,8 +29,32 @@
 		padding: 0.5rem 1rem;
 	}
 	.wrapper {
-		display: inline-flex;
-		justify-content: center;
+		display: flex;
+		justify-content: space-between;
 		align-items: center;
+	}
+	
+	nav ul {
+		display: inline-block;
+		list-style-type: none;
+		padding: 0;
+	}
+
+	nav li {
+		display: inline;
+		margin: 0 0.5rem;
+	}
+
+	nav a {
+		color: white;
+		text-decoration: none;
+	}
+	
+	nav a:hover {
+		text-decoration: underline;
+	}
+	.copyright {
+		font-size: 12px;
+		margin: 0 0.5rem;
 	}
 </style>
