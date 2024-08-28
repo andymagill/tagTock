@@ -1,3 +1,4 @@
+
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { fade, slide } from 'svelte/transition';
@@ -21,6 +22,7 @@
   $: isRunning = timerState?.isRunning ?? false;
   $: elapsedTime = timerState?.elapsedTime ?? 0;
   $: canArchive = currentTask.trim() !== '' && elapsedTime > 0;
+  $: canReset = elapsedTime > 0;
 
   function formatTime(ms: number): string {
     const seconds = Math.floor(ms / 1000) % 60;
@@ -52,6 +54,10 @@
       taskDescription = '';
     }
   }
+  function resetTimer() {
+    pauseTimer();
+    timerStore.resetElapsedTime();
+  }
 
   function handleTaskInput(event: CustomEvent<{ name: string; description: string }>) {
     timerStore.setTask(event.detail.name);
@@ -75,21 +81,18 @@
 </script>
 
 <section>
-  <h1>TagTock Timer</h1>
-
   <div class="timer-container">
     <div class="timer-display">
       <time datetime={formatTime(elapsedTime)}>{formatTime(elapsedTime)}</time>
     </div>
+
     <div class="timer-controls">
       {#if isRunning}
         <button on:click={pauseTimer} transition:slide|local={{ duration: 300 }}>Pause</button>
       {:else}
         <button on:click={startTimer} transition:slide|local={{ duration: 300 }}>Start</button>
       {/if}
-      {#if canArchive}
-        <button on:click={archiveTask} transition:slide|local={{ duration: 300 }}>Archive</button>
-      {/if}
+      <button on:click={resetTimer} disabled={!canReset}>Reset</button>
     </div>
   </div>
 
@@ -105,13 +108,9 @@
     on:change={handleTagChange}
   />
 
-  {#if currentTask}
-    <div class="current-task">
-      <h3>Current Task: {currentTask}</h3>
-      <p>Description: {taskDescription || 'No description'}</p>
-      <p>Tags: {selectedTags.join(', ') || 'None'}</p>
-    </div>
-  {/if}
+  <div class="task-actions">
+    <button on:click={archiveTask} disabled={!canArchive}>Archive</button>
+  </div>
 </section>
 
 <style>
@@ -137,7 +136,7 @@
   .timer-display time {
     font-family: monospace;
     background-color: #f0f0f0;
-    padding: 0.5rem 1rem;
+    padding: 2rem;
     border-radius: 4px;
     display: inline-block;
   }
@@ -164,14 +163,13 @@
   }
 
   button:disabled {
-    opacity: 0.5;
+    background-color: #ccc;
     cursor: not-allowed;
   }
-
-  .current-task {
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: #f0f0f0;
-    border-radius: 4px;
+  
+  .task-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
   }
 </style>

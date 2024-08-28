@@ -61,6 +61,14 @@ function createTimerStore() {
             set(resetState);
             saveTimerState(resetState);
         },
+        resetElapsedTime: () => update(state => {
+          state.isRunning = false;
+          state.startTime = null;
+          state.elapsedTime = 0;
+          state.lastUpdated = Date.now();
+          saveTimerState(state);
+          return state;
+        }),
         updateElapsedTime: () => update(state => {
             if (state.isRunning) {
                 const now = Date.now();
