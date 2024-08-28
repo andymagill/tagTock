@@ -7,8 +7,10 @@
 
 <header class="header">
 	<div class="logo">
-		<img src="/clock-logo.svg" alt="TagTock Logo" width="50" height="50" />
-		<h1>{title}</h1>
+		<a href="/">
+			<img src="/clock-logo.svg" alt="TagTock Logo" width="50" height="50" />
+			<span class="h1">{title}</span>
+		</a>
 	</div>
 
 	<nav>
@@ -31,8 +33,11 @@
 		color: white;
 		text-align: center;
 	}
-	.logo h1 {
+	.h1 {
 		display: inline-block;
+		margin: 0;
+		font-size: 2rem;
+		font-weight: bold;
 	}
 
 	nav ul {

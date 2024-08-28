@@ -4,11 +4,16 @@
   import { timerStore } from '$lib/stores/timerStore';
   import { fade, slide } from 'svelte/transition';
   import type { Task } from '../../app';
+  import Modal from './Modal.svelte';
 
   export let filterTag: string = '';
 
   let tasks: Task[] = [];
   let expandedTaskId: string | null = null;
+  let showModal = false;
+  let modalTitle = '';
+  let modalMessage = '';
+  let modalAction: (() => void) | null = null;
 
   $: filteredTasks = filterTag
     ? tasks.filter(task => task.tags.includes(filterTag))
@@ -37,17 +42,51 @@
     expandedTaskId = expandedTaskId === taskId ? null : taskId;
   }
 
+  function confirmDelete(taskId: string) {
+    modalTitle = 'Confirm Delete';
+    modalMessage = 'Are you sure you want to delete this task?';
+    modalAction = () => deleteTask(taskId);
+    showModal = true;
+  }
+
   function deleteTask(taskId: string) {
     taskStore.deleteTask(taskId);
+    showModal = false;
+  }
+
+  function confirmCopy(task: Task) {
+    modalTitle = 'Confirm Copy';
+    modalMessage = 'Are you sure you want to copy this task to the timer?';
+    modalAction = () => copyTask(task);
+    showModal = true;
   }
 
   function copyTask(task: Task) {
     timerStore.setTask(task.name);
     timerStore.setDescription(task.description);
     timerStore.setTags(task.tags);
+    showModal = false;
     alert('Task copied to timer view!');
   }
+
+  function handleModalClose() {
+    showModal = false;
+  }
+
+  function handleModalConfirm() {
+    if (modalAction) {
+      modalAction();
+    }
+  }
 </script>
+
+<Modal
+  bind:show={showModal}
+  title={modalTitle}
+  message={modalMessage}
+  on:close={handleModalClose}
+  on:confirm={handleModalConfirm}
+/>
 
 <div class="task-list">
   <div class="task-header">
@@ -71,6 +110,7 @@
           <span class="task-duration">{formatDuration(task.duration)}</span>
           <span class="task-date">{formatDate(task.createdAt)}</span>
         </button>
+        
         {#if expandedTaskId === task.id}
           <div 
             id={`task-details-${task.id}`}
@@ -81,9 +121,10 @@
               <p><strong>Description:</strong> {task.description || 'No description provided'}</p>
               <p><strong>Tags:</strong> {task.tags.join(', ') || 'None'}</p>
             </div>
+
             <div class="task-actions">
-              <button on:click={() => copyTask(task)}>Copy</button>
-              <button on:click={() => deleteTask(task.id)}>Delete</button>
+              <button on:click={() => confirmCopy(task)}>Copy</button>
+              <button on:click={() => confirmDelete(task.id)}>Delete</button>
             </div>
           </div>
         {/if}
