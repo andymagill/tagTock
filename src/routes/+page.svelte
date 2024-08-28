@@ -1,14 +1,15 @@
 <script lang="ts">
+	import config from '$lib/config';
 	import TimerView from '$lib/components/TimerView.svelte';
 </script>
-  
+
+
 <svelte:head>
-    <title>TagTock - A minimalistic time tracking app</title>
-  </svelte:head>
+	<title>{$config.appName} - {$config.appDescription}</title>
+</svelte:head>
 
 <main>
-	<h1>TagTock Timer</h1>
-	<p>A minimalistic time tracking app</p>
+	<h1>{$config.appDescription}</h1>
 	<TimerView />
 </main>
 
@@ -18,9 +19,7 @@
 		margin: 0 auto;
 		padding: 1rem;
 	}
-
-	h1,
-	h1 + p {
+	h1 {
 		display: none;
 	}
 </style>

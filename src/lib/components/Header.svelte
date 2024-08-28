@@ -6,27 +6,26 @@
 </script>
 
 <header class="header">
-	<div class="logo">
-		<a href="/">
-			<img src="/clock-logo.svg" alt="TagTock Logo" width="50" height="50" />
-			<span class="h1">{title}</span>
-		</a>
-	</div>
+	<div class="wrapper">
+		<div class="logo">
+			<a href="/">
+				<img src="/clock-logo.svg" alt="TagTock Logo" width="50" height="50" />
+				<span class="h1">{title}</span>
+			</a>
+		</div>
 
-	<nav>
-		<ul>
-			<li><a href="/" on:click|preventDefault={() => goto('/')}>Timer</a></li>
-			<li><a href="/archive" on:click|preventDefault={() => goto('/Archive')}>Archive</a></li>
-			<li><a href="/reports" on:click|preventDefault={() => goto('/reports')}>Reports</a></li>
-		</ul>
-	</nav>
+		<nav>
+			<ul>
+				<li><a href="/" on:click|preventDefault={() => goto('/')}>Timer</a></li>
+				<li><a href="/archive" on:click|preventDefault={() => goto('/archive')}>Archive</a></li>
+				<li><a href="/reports" on:click|preventDefault={() => goto('/reports')}>Reports</a></li>
+			</ul>
+		</nav>
+	</div>
 </header>
 
 <style>
 	.header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
 		padding: 0.5rem 1rem;
 
 		background-color: #4caf50;
@@ -47,7 +46,11 @@
 		gap: 0.5em;
 	}
 
-
+	.wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 	nav ul {
 		list-style-type: none;
 		padding: 0;
