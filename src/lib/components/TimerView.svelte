@@ -2,19 +2,31 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { fade, slide } from 'svelte/transition';
+  import { tweened } from 'svelte/motion';
+  import { cubicOut } from 'svelte/easing';
+
   import { timerStore } from '$lib/stores/timerStore';
   import { taskStore } from '$lib/stores/taskStore';
   import TaskInput from '$lib/components/TaskInput.svelte';
   import TagSelector from '$lib/components/TagSelector.svelte';
   import type { TimerState } from '../../app';
+  
 
   let timerState: TimerState;
   let intervalId: number | null = null;
   let availableTags = ['Work', 'Personal', 'Study', 'Exercise', 'Reading'];
   let taskDescription = '';
+  let isLoading = true;
 
+  const displayedTime = tweened(0, {
+    duration: 2000,
+    easing: cubicOut
+  });
+  
   const unsubscribe = timerStore.subscribe(value => {
     timerState = value;
+    isLoading = false;
+    displayedTime.set(value.elapsedTime);
   });
 
   $: currentTask = timerState?.currentTask ?? '';
@@ -57,6 +69,7 @@
   function resetTimer() {
     pauseTimer();
     timerStore.resetElapsedTime();
+    displayedTime.set(0);
   }
 
   function handleTaskInput(event: CustomEvent<{ name: string; description: string }>) {
@@ -70,7 +83,10 @@
 
   onMount(() => {
     if (isRunning) {
-      intervalId = setInterval(() => timerStore.updateElapsedTime(), 1000);
+      intervalId = setInterval(() => {
+        timerStore.updateElapsedTime();
+        displayedTime.set(timerState.elapsedTime);
+      }, 1000);
     }
   });
 
@@ -83,7 +99,7 @@
 <section>
   <div class="timer-container">
     <div class="timer-display">
-      <time datetime={formatTime(elapsedTime)}>{formatTime(elapsedTime)}</time>
+      <time datetime={formatTime($displayedTime)}>{formatTime($displayedTime)}</time>
     </div>
 
     <div class="timer-controls">
