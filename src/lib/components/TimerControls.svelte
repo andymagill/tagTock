@@ -1,3 +1,4 @@
+
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import { tweened } from 'svelte/motion';
@@ -42,29 +43,27 @@
 
 <style>
 	.timer-container {
-		display: grid;
-		grid-template-columns: 2fr 1fr;
-		gap: 1rem;
-		align-items: center;
-		margin-bottom: 2rem;
+		/* flex: 1; */
 	}
 
 	.timer-display {
-		font-size: 3rem;
 		text-align: center;
+		margin-bottom: 2rem;
 	}
 
 	.timer-display time {
-		font-family: monospace;
+		display: block;
+		font-size: 3.6rem;
+		line-height: 1em; 
 		background-color: #f0f0f0;
-		padding: 2rem;
-		border-radius: 4px;
-		display: inline-block;
+		padding: 2.2rem;
+		border-radius: 8px;
+		min-width: 240px;
 	}
 
 	.timer-controls {
 		display: flex;
-		flex-direction: column;
+		justify-content: center;
 		gap: 0.5rem;
 	}
 

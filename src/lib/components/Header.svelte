@@ -46,6 +46,13 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		flex-direction: column;
+	}
+
+	@media screen and (min-width: 480px) {
+		.wrapper {
+			flex-direction: row;
+		}
 	}
 	nav ul {
 		list-style-type: none;

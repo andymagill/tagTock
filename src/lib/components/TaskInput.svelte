@@ -41,7 +41,7 @@
 
 	input,
 	textarea {
-		width: 100%;
+		display: block;
 		padding: 0.5rem;
 		border: 1px solid #ccc;
 		border-radius: 4px;

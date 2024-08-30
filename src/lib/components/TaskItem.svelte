@@ -109,13 +109,14 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 1rem;
+		padding: 0.67rem;
 		cursor: pointer;
 		background-color: #f0f0f0;
 	}
 
 	.task-header h3 {
 		margin: 0;
+		font-size: 1.6rem;
 	}
 
 	.task-details {
