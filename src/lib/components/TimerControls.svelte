@@ -32,11 +32,17 @@
 
 	<div class="timer-controls">
 		{#if isRunning}
-			<button on:click={pauseTimer} transition:slide|local={{ duration: 300 }}>Pause</button>
+			<button on:click={pauseTimer} transition:slide|local={{ duration: 300 }}>
+				<i class="fas fa-pause"></i> Pause
+			</button>
 		{:else}
-			<button on:click={startTimer} transition:slide|local={{ duration: 300 }}>Start</button>
+			<button on:click={startTimer} transition:slide|local={{ duration: 300 }}>
+				<i class="fas fa-play"></i> Start
+			</button>
 		{/if}
-		<button on:click={resetTimer} disabled={!canReset}>Reset</button>
+		<button on:click={resetTimer} disabled={!canReset}>
+			<i class="fas fa-undo"></i> Reset
+		</button>
 	</div>
 </div>
 
