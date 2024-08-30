@@ -52,3 +52,11 @@ The .env file contains variables that are used throughout the application. For e
 
 `PUBLIC_GTM_ID`: Your Google Tag Manager ID
 Make sure to update the values in the .env file to match your specific configuration.
+
+
+## Developement Roadmap
+Check out our [Roadmap](ROADMAP.md) to see what's coming next and to track our progress.
+
+
+## License
+Consider the code in this projec its current state open to unrestricted use, but may go closed at some point soon. 
