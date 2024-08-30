@@ -71,10 +71,11 @@
 </script>
 
 <div class="task-item" transition:fade>
-	<div class="task-header" on:click={toggleTaskExpansion}>
+	<button class="task-header" on:click={toggleTaskExpansion}>
 		<h3>{task.name}</h3>
-		<span>{formatDuration(task.duration)}</span>
-	</div>
+		<span class="duration">{formatDuration(task.duration)}</span>
+		<span class="task-updated-at">{formatDate(task.createdAt)}</span>
+	  </button>
 	{#if expandedTaskId === task.id}
 		<div class="task-details" transition:slide>
 			<p><strong>Description:</strong> {task.description || 'No description'}</p>
@@ -82,7 +83,7 @@
 			<p><strong>Created:</strong> {formatDate(task.createdAt)}</p>
 			<div class="task-actions">
 				<button on:click={confirmCopy}>Copy</button>
-				<button on:click={confirmDelete}>Delete</button>
+				<button class="delete" on:click={confirmDelete}>Delete</button>
 			</div>
 		</div>
 	{/if}
@@ -105,24 +106,42 @@
 		overflow: hidden;
 	}
 
+	.parent {
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 1 / 1 / 2 / 3; }
+.div2 { grid-area: 1 / 3 / 2 / 4; }
+.div3 { grid-area: 1 / 4 / 2 / 5; }
 	.task-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: 1fr;
+		gap: 1rem;
 		padding: 0.67rem;
+
 		cursor: pointer;
 		background-color: #f0f0f0;
+		width: 100%;
+		border: 1px none transparent;
 	}
 
 	.task-header h3 {
+		grid-column: 1 / 3;
 		margin: 0;
-		font-size: 1.6rem;
+
+		font-size: 1.11rem;
+		font-weight: 300;
+		text-align: left;
 	}
 
 	.task-details {
 		padding: 1rem;
 	}
-
+	.duration {
+		text-align: left;
+	}
 	.task-actions {
 		display: flex;
 		justify-content: flex-end;
@@ -137,6 +156,9 @@
 		cursor: pointer;
 		background-color: #007bff;
 		color: white;
+	}
+	.task-actions .delete {
+		background-color: #ff0059;
 	}
 
 	.task-actions button:hover {

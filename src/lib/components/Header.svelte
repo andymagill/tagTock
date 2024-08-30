@@ -9,14 +9,17 @@
 	<div class="wrapper">
 		<div class="logo">
 			<a href="/">
-				<img src="/clock-logo.svg" alt="TagTock Logo" width="50" height="50" />
+				<img src="/clock-logo.svg" alt="{title} Logo" width="50" height="50" />
 				<span class="h1">{title}</span>
 			</a>
 		</div>
 
 		<nav>
 			<ul>
-				<li><a href="/" on:click|preventDefault={() => goto('/')}>Timer</a></li>
+				<li><a href="/" on:click|preventDefault={() => goto('/')}>
+					<i class="fa-regular fa-clock"></i>
+					<span>Timer</span>
+				</a></li>
 				<li><a href="/archive" on:click|preventDefault={() => goto('/archive')}>Archive</a></li>
 				<li><a href="/reports" on:click|preventDefault={() => goto('/charts')}>Charts</a></li>
 			</ul>

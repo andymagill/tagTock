@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { slide } from 'svelte/transition';
+	import { horizontalSlide } from '../utils/transitions';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
 
@@ -32,15 +32,15 @@
 
 	<div class="timer-controls">
 		{#if isRunning}
-			<button on:click={pauseTimer} transition:slide|local={{ duration: 300 }}>
+			<button on:click={pauseTimer} transition:horizontalSlide={{axis: 'x', duration: 300}}>
 				<i class="fas fa-pause"></i> Pause
 			</button>
 		{:else}
-			<button on:click={startTimer} transition:slide|local={{ duration: 300 }}>
+			<button on:click={startTimer} transition:horizontalSlide={{axis: 'x', duration: 300}}>
 				<i class="fas fa-play"></i> Start
 			</button>
 		{/if}
-		<button on:click={resetTimer} disabled={!canReset}>
+		<button class="reset" on:click={resetTimer} disabled={!canReset}>
 			<i class="fas fa-undo"></i> Reset
 		</button>
 	</div>
@@ -80,8 +80,11 @@
 		border: none;
 		border-radius: 4px;
 		transition: background-color 0.3s ease;
+		white-space: nowrap;
 	}
-
+	.reset {
+		background-color: #dc3545;
+	}
 	button:hover:not(:disabled) {
 		background-color: #0056b3;
 	}
