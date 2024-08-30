@@ -1,4 +1,3 @@
-
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import { tweened } from 'svelte/motion';
@@ -54,7 +53,7 @@
 	.timer-display time {
 		display: block;
 		font-size: 3.6rem;
-		line-height: 1em; 
+		line-height: 1em;
 		background-color: #f0f0f0;
 		padding: 2.2rem;
 		border-radius: 8px;
