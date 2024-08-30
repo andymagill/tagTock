@@ -1,6 +1,6 @@
 <script lang="ts">
 	import config from '$lib/config';
-	import TimerContainer from '$lib/components/TimerContainer.svelte';
+	import CurrentTask from '$lib/components/CurrentTask.svelte';
 </script>
 
 <svelte:head>
@@ -9,7 +9,7 @@
 
 <main>
 	<h1>{$config.appDescription}</h1>
-	<TimerContainer />
+	<CurrentTask />
 </main>
 
 <style>

@@ -23,8 +23,6 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		background-color: #333;
-		color: white;
 		text-align: center;
 		padding: 0.5rem 1rem;
 	}
@@ -46,7 +44,6 @@
 	}
 
 	nav a {
-		color: white;
 		text-decoration: none;
 	}
 

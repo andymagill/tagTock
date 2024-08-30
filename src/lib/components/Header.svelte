@@ -27,9 +27,6 @@
 <style>
 	.header {
 		padding: 0.5rem 1rem;
-
-		background-color: #4caf50;
-		color: white;
 		text-align: center;
 	}
 	.h1 {
@@ -41,7 +38,6 @@
 	a {
 		display: inline-flex;
 		align-items: center;
-		color: white;
 		text-decoration: none;
 		gap: 0.5em;
 	}
@@ -62,7 +58,6 @@
 	}
 
 	nav a {
-		color: white;
 		text-decoration: none;
 	}
 
