@@ -102,13 +102,12 @@
 		overflow: hidden;
 	}
 	.task-header {
-
 		display: grid;
-		grid-template-columns: repeat(2, 1fr); 
+		grid-template-columns: repeat(2, 1fr);
 		grid-template-rows: repeat(2, 1fr);
-		grid-template-areas: 
-			"name name"
-			"duration datetime";
+		grid-template-areas:
+			'name name'
+			'duration datetime';
 
 		gap: 1rem;
 		padding: 1.125rem;
@@ -120,15 +119,14 @@
 	}
 	@media (min-width: 480px) {
 		.task-header {
-			grid-template-columns: repeat(4, 1fr); 
-			grid-template-rows: 1fr; 
-			grid-template-areas: 
-				"name name duration datetime"; 
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-rows: 1fr;
+			grid-template-areas: 'name name duration datetime';
 		}
 	}
 
 	.task-header h3 {
-		grid-area: name; 
+		grid-area: name;
 		margin: 0;
 
 		font-size: 1.14rem;

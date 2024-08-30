@@ -16,12 +16,24 @@
 
 		<nav>
 			<ul>
-				<li><a href="/" on:click|preventDefault={() => goto('/')}>
-					<i class="fa-regular fa-clock"></i>
-					<span>Timer</span>
-				</a></li>
-				<li><a href="/archive" on:click|preventDefault={() => goto('/archive')}>Archive</a></li>
-				<li><a href="/reports" on:click|preventDefault={() => goto('/charts')}>Charts</a></li>
+				<li>
+					<a href="/" on:click|preventDefault={() => goto('/')}>
+						<i class="fa-regular fa-clock"></i>
+						<span>Timer</span>
+					</a>
+				</li>
+				<li>
+					<a href="/archive" on:click|preventDefault={() => goto('/archive')}>
+						<i class="fa-solid fa-list"></i>
+						<span>Archive</span>
+					</a>
+				</li>
+				<li>
+					<a href="/reports" on:click|preventDefault={() => goto('/charts')}
+						><i class="fa-solid fa-chart-simple"></i>
+						<span>Charts</span>
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</div>
@@ -64,7 +76,7 @@
 
 	nav li {
 		display: inline;
-		margin: 0 0.5rem;
+		margin: 0 0.75rem;
 	}
 
 	nav a {

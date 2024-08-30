@@ -32,11 +32,11 @@
 
 	<div class="timer-controls">
 		{#if isRunning}
-			<button on:click={pauseTimer} transition:horizontalSlide={{axis: 'x', duration: 300}}>
+			<button on:click={pauseTimer} transition:horizontalSlide={{ axis: 'x', duration: 300 }}>
 				<i class="fas fa-pause"></i> Pause
 			</button>
 		{:else}
-			<button on:click={startTimer} transition:horizontalSlide={{axis: 'x', duration: 300}}>
+			<button on:click={startTimer} transition:horizontalSlide={{ axis: 'x', duration: 300 }}>
 				<i class="fas fa-play"></i> Start
 			</button>
 		{/if}
