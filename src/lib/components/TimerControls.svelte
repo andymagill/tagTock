@@ -43,6 +43,7 @@
 <style>
 	.timer-container {
 		/* flex: 1; */
+		min-width: 44%;
 	}
 
 	.timer-display {
@@ -52,12 +53,10 @@
 
 	.timer-display time {
 		display: block;
-		font-size: 3.6rem;
+		font-size: clamp(48px, 8vw, 64px);
 		line-height: 1em;
-		background-color: #f0f0f0;
-		padding: 2.2rem;
+		padding: 1rem;
 		border-radius: 8px;
-		min-width: 240px;
 	}
 
 	.timer-controls {

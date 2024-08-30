@@ -105,13 +105,19 @@
 
 <style>
 	section {
-		padding: 1.33rem;
 	}
 
 	.current-task {
 		display: flex;
 		flex-direction: column;
-		gap: 1.67rem;
+		gap: 1rem;
+		padding: 1rem;
+	}
+
+	@media screen and (min-width: 480px) {
+		.current-task {
+			flex-direction: row;
+		}
 	}
 	.task-controls {
 		flex-grow: 1;
