@@ -114,7 +114,7 @@
 		padding: 1rem;
 	}
 
-	@media screen and (min-width: 480px) {
+	@media (min-width: 480px) {
 		.current-task {
 			flex-direction: row;
 		}

@@ -33,7 +33,7 @@
 		flex-direction: column;
 	}
 
-	@media screen and (min-width: 480px) {
+	@media (min-width: 480px) {
 		.wrapper {
 			flex-direction: row;
 		}

@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { fade, slide } from 'svelte/transition';
 	import { taskStore } from '$lib/stores/taskStore';
 	import { timerStore } from '$lib/stores/timerStore';
 	import type { Task } from '../../app';
 	import Modal from './Modal.svelte';
-	import { goto } from '$app/navigation';
+	import { formatDateShort, formatDateLong, formatDuration } from '../utils/timeUtils';
 
 	export let task: Task;
 	export let expandedTaskId: string | null;
@@ -13,17 +14,6 @@
 	let modalTitle = '';
 	let modalMessage = '';
 	let modalAction: (() => void) | null = null;
-
-	function formatDuration(ms: number): string {
-		const seconds = Math.floor(ms / 1000) % 60;
-		const minutes = Math.floor(ms / (1000 * 60)) % 60;
-		const hours = Math.floor(ms / (1000 * 60 * 60));
-		return `${hours}h ${minutes}m ${seconds}s`;
-	}
-
-	function formatDate(dateString: string): string {
-		return new Date(dateString).toLocaleString();
-	}
 
 	function toggleTaskExpansion() {
 		expandedTaskId = expandedTaskId === task.id ? null : task.id;
@@ -72,18 +62,24 @@
 
 <div class="task-item" transition:fade>
 	<button class="task-header" on:click={toggleTaskExpansion}>
-		<h3>{task.name}</h3>
+		<h3 class="name">{task.name}</h3>
 		<span class="duration">{formatDuration(task.duration)}</span>
-		<span class="task-updated-at">{formatDate(task.createdAt)}</span>
-	  </button>
+		<span class="datetime">{formatDateShort(task.createdAt)}</span>
+	</button>
 	{#if expandedTaskId === task.id}
 		<div class="task-details" transition:slide>
 			<p><strong>Description:</strong> {task.description || 'No description'}</p>
 			<p><strong>Tags:</strong> {task.tags.join(', ') || 'No tags'}</p>
-			<p><strong>Created:</strong> {formatDate(task.createdAt)}</p>
+			<p><strong>Created:</strong> {formatDateLong(task.createdAt)}</p>
 			<div class="task-actions">
-				<button on:click={confirmCopy}>Copy</button>
-				<button class="delete" on:click={confirmDelete}>Delete</button>
+				<button on:click={confirmCopy}>
+					<i class="fas fa-copy"></i>&nbsp;
+					<span>Copy</span>
+				</button>
+				<button class="delete" on:click={confirmDelete}>
+					<i class="fas fa-remove"></i>&nbsp;
+					<span>Delete</span>
+				</button>
 			</div>
 		</div>
 	{/if}
@@ -105,35 +101,62 @@
 		margin-bottom: 1rem;
 		overflow: hidden;
 	}
-
-	.parent {
-grid-column-gap: 0px;
-grid-row-gap: 0px;
-}
-
-.div1 { grid-area: 1 / 1 / 2 / 3; }
-.div2 { grid-area: 1 / 3 / 2 / 4; }
-.div3 { grid-area: 1 / 4 / 2 / 5; }
 	.task-header {
+
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: 1fr;
+		grid-template-columns: repeat(2, 1fr); 
+		grid-template-rows: repeat(2, 1fr);
+		grid-template-areas: 
+			"name name"
+			"duration datetime";
+
 		gap: 1rem;
-		padding: 0.67rem;
+		padding: 1.125rem;
 
 		cursor: pointer;
 		background-color: #f0f0f0;
 		width: 100%;
 		border: 1px none transparent;
 	}
+	@media (min-width: 480px) {
+		.task-header {
+			grid-template-columns: repeat(4, 1fr); 
+			grid-template-rows: 1fr; 
+			grid-template-areas: 
+				"name name duration datetime"; 
+		}
+	}
 
 	.task-header h3 {
-		grid-column: 1 / 3;
+		grid-area: name; 
 		margin: 0;
 
-		font-size: 1.11rem;
+		font-size: 1.14rem;
+		font-weight: 400;
+		text-align: left;
+		line-height: 1em;
+	}
+	@media (min-width: 480px) {
+		.task-header h3 {
+			grid-column: 1 / 3;
+			grid-row: 1 / 2;
+		}
+	}
+	.task-header span {
+		margin: 0;
+
+		font-size: 1rem;
 		font-weight: 300;
 		text-align: left;
+		white-space: nowrap;
+	}
+	.task-header .duration {
+		grid-area: duration;
+	}
+
+	.task-header .datetime {
+		grid-area: datetime;
+		text-align: right;
 	}
 
 	.task-details {
