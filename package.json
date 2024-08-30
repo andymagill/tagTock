@@ -32,6 +32,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fortawesome/fontawesome-free": "^6.6.0",
 		"chart.js": "^4.4.4",
 		"svelte-chartjs": "^3.1.5"
 	}
