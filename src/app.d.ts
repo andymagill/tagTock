@@ -15,7 +15,7 @@ declare namespace App {
 export interface Task {
 	id: string;
 	name: string;
-    description: string;
+	description: string;
 	duration: number;
 	tags: string[];
 	createdAt: string;
@@ -28,16 +28,16 @@ interface Tag {
 
 declare global {
 	interface Window {
-	  dataLayer: Array<Record<string, unknown>>;
+		dataLayer: Array<Record<string, unknown>>;
 	}
 }
 
 export interface TimerState {
-    isRunning: boolean;
-    startTime: number | null;
-    elapsedTime: number;
-    currentTask: string;
-    currentDescription: string;
-    selectedTags: string[];
-    lastUpdated: number;
+	isRunning: boolean;
+	startTime: number | null;
+	elapsedTime: number;
+	currentTask: string;
+	currentDescription: string;
+	selectedTags: string[];
+	lastUpdated: number;
 }

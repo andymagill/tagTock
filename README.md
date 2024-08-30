@@ -43,9 +43,11 @@ To install, follow these steps:
 `npm run format`: Format the code according to the project's configuration.
 
 ## Configuration
+
 To configure the project, you can modify the config.ts file in the src/lib directory. This file contains the project's configuration options, such as the app name and description.
 
 ## Environment Variables
+
 This project uses environment variables to configure certain settings. You can find an example of the expected environment variables in the .env file in the project root.
 
 The .env file contains variables that are used throughout the application. For example:
@@ -53,10 +55,10 @@ The .env file contains variables that are used throughout the application. For e
 `PUBLIC_GTM_ID`: Your Google Tag Manager ID
 Make sure to update the values in the .env file to match your specific configuration.
 
-
 ## Developement Roadmap
+
 Check out our [Roadmap](ROADMAP.md) to see what's coming next and to track our progress.
 
-
 ## License
-Consider the code in this projec its current state open to unrestricted use, but may go closed at some point soon. 
+
+Consider the code in this projec its current state open to unrestricted use, but may go closed at some point soon.

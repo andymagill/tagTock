@@ -33,7 +33,7 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	
+
 	nav ul {
 		display: inline-block;
 		list-style-type: none;
@@ -49,7 +49,7 @@
 		color: white;
 		text-decoration: none;
 	}
-	
+
 	nav a:hover {
 		text-decoration: underline;
 	}

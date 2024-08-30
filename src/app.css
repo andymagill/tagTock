@@ -1,33 +1,32 @@
-
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
-    --background-color: #f8f9fa;
-    --text-color: #212529;
-    --inner-width: 800px;
-    --mobile: 480px;
+	--primary-color: #007bff;
+	--secondary-color: #6c757d;
+	--background-color: #f8f9fa;
+	--text-color: #212529;
+	--inner-width: 800px;
+	--mobile: 480px;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 1.5em;
-    margin: 0;
+	font-family: 'Arial', sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 1.5em;
+	margin: 0;
 
-    background-color: var(--background-color);
-    color: var(--text-color);
+	background-color: var(--background-color);
+	color: var(--text-color);
 }
 .app {
-    position: relative;
-    padding-bottom: 6em;
-    min-height: calc(100dvh - 6em);
+	position: relative;
+	padding-bottom: 6em;
+	min-height: calc(100dvh - 6em);
 }
 .wrapper {
-    max-width: var(--inner-width);
+	max-width: var(--inner-width);
 
-    paddng-left: 1.5em; 
-    paddng-right: 1.5em;
-    margin-left: auto;
-    margin-right: auto;
+	paddng-left: 1.5em;
+	paddng-right: 1.5em;
+	margin-left: auto;
+	margin-right: auto;
 }

@@ -3,7 +3,6 @@
 	import TimerContainer from '$lib/components/TimerContainer.svelte';
 </script>
 
-
 <svelte:head>
 	<title>{$config.appName} - {$config.appDescription}</title>
 </svelte:head>
