@@ -1,14 +1,20 @@
 # Tag Tock
 
-A minimalistic time tracking tool
+## Project Overview
+
+Tag Tock is a minimalistic time tracking tool built with Vite and Svelte Kit. It provides a simple and intuitive interface for tracking time spent on tasks.
 
 ## GETTING STARTED
 
 This project uses Vite and Svelte Kit for development and building. Below are brief instructions on how to use the available npm scripts.
 
-## Install
+## Installation
 
-`npm install`: Installs project dependencies
+To install, follow these steps:
+
+1. Make sure you have Node.js version 14 or higher installed on your machine.
+2. Clone the repository: `git clone https://github.com/yourusername/tag-tock.git`
+3. Install the project dependencies: `npm install`
 
 ## Development
 
@@ -35,3 +41,14 @@ This project uses Vite and Svelte Kit for development and building. Below are br
 `npm run lint`: Check the code for formatting and linting errors.
 
 `npm run format`: Format the code according to the project's configuration.
+
+## Configuration
+To configure the project, you can modify the config.ts file in the src/lib directory. This file contains the project's configuration options, such as the app name and description.
+
+## Environment Variables
+This project uses environment variables to configure certain settings. You can find an example of the expected environment variables in the .env file in the project root.
+
+The .env file contains variables that are used throughout the application. For example:
+
+`PUBLIC_GTM_ID`: Your Google Tag Manager ID
+Make sure to update the values in the .env file to match your specific configuration.

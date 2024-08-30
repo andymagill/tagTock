@@ -26,6 +26,12 @@ interface Tag {
 	name: string;
 }
 
+declare global {
+	interface Window {
+	  dataLayer: Array<Record<string, unknown>>;
+	}
+}
+
 export interface TimerState {
     isRunning: boolean;
     startTime: number | null;

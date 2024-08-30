@@ -5,6 +5,7 @@
     --background-color: #f8f9fa;
     --text-color: #212529;
     --inner-width: 800px;
+    --mobile: 480px;
 }
 
 body {
