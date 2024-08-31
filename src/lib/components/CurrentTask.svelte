@@ -132,7 +132,7 @@
 		padding: 0.5rem 1rem;
 		font-size: 1rem;
 		cursor: pointer;
-		background-color: #007bff;
+		background-color: #1387cf;
 		color: white;
 		border: none;
 		border-radius: 4px;

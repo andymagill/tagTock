@@ -74,7 +74,7 @@
 	}
 
 	button:last-child {
-		background-color: #007bff;
+		background-color: #1387cf;
 		color: white;
 	}
 </style>

@@ -36,7 +36,11 @@
 				<i class="fas fa-pause"></i> Pause
 			</button>
 		{:else}
-			<button on:click={startTimer} transition:horizontalSlide={{ axis: 'x', duration: 300 }}>
+			<button
+				class="start"
+				on:click={startTimer}
+				transition:horizontalSlide={{ axis: 'x', duration: 300 }}
+			>
 				<i class="fas fa-play"></i> Start
 			</button>
 		{/if}
@@ -75,18 +79,21 @@
 		padding: 0.5rem 1rem;
 		font-size: 1rem;
 		cursor: pointer;
-		background-color: #007bff;
+		background-color: #1387cf;
 		color: white;
 		border: none;
 		border-radius: 4px;
 		transition: background-color 0.3s ease;
 		white-space: nowrap;
 	}
+	.start {
+		background-color: #6c9f1b;
+	}
 	.reset {
 		background-color: #dc3545;
 	}
 	button:hover:not(:disabled) {
-		background-color: #0056b3;
+		background-color: #453e4c;
 	}
 
 	button:disabled {

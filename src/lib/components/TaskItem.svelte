@@ -175,7 +175,7 @@
 		border: none;
 		border-radius: 4px;
 		cursor: pointer;
-		background-color: #007bff;
+		background-color: #1387cf;
 		color: white;
 	}
 	.task-actions .delete {

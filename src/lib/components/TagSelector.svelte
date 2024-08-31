@@ -50,7 +50,7 @@
 	}
 
 	button.selected {
-		background-color: #007bff;
+		background-color: #1387cf;
 		color: #fff;
 	}
 
