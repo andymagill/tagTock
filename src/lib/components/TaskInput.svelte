@@ -27,7 +27,7 @@
 		bind:value={description}
 		on:input={handleDescriptionInput}
 		placeholder="Enter task description"
-		rows="3"
+		rows="5"
 	></textarea>
 </div>
 

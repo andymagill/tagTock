@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ChartView from '$lib/components/ChartView.svelte';
+	import BarChart from '$lib/components/BarChart.svelte';
 	import { taskStore } from '$lib/stores/taskStore';
 	import { onMount } from 'svelte';
 	import type { Task } from '../../app';
@@ -24,7 +24,7 @@
 	<h1>Charts</h1>
 
 	{#if tasks.length > 0}
-		<ChartView {tasks} />
+		<BarChart {tasks} />
 	{:else}
 		<p>No tasks available to display in the chart.</p>
 	{/if}

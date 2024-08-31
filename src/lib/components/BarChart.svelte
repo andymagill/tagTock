@@ -6,10 +6,12 @@
 
 	export let tasks: Task[] = [];
 
+	// Define chart data type
 	type ChartData<TType extends keyof ChartTypeRegistry = keyof ChartTypeRegistry> = Omit<
 		ChartDataOriginal<TType>,
 		'datasets'
 	> & {
+		// define dataset type
 		datasets: {
 			data: number[];
 			label: string;
@@ -25,6 +27,7 @@
 	let isMounted = false;
 
 	onMount(async () => {
+		// Import the chart components
 		const { Bar } = await import('svelte-chartjs');
 		const {
 			Chart: ChartJS,
@@ -36,14 +39,14 @@
 			LinearScale
 		} = await import('chart.js');
 
+		// Register the chart components
 		ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 		Chart = Bar;
 		isMounted = true;
 	});
 
 	$: {
-		console.log('Tasks in ChartView:', tasks); // Debug log
-
+		// Convert tasks to hours
 		const tasksByTag = tasks.reduce(
 			(acc, task) => {
 				task.tags.forEach((tag) => {
@@ -55,20 +58,15 @@
 			{} as Record<string, number>
 		);
 
-		console.log('Tasks by tag:', tasksByTag); // Debug log
-
 		const labels = Object.keys(tasksByTag);
 		const data = Object.values(tasksByTag).map((duration) => duration / (1000 * 60 * 60)); // Convert to hours
-
-		console.log('Chart labels:', labels); // Debug log
-		console.log('Chart data:', data); // Debug log
 
 		chartData = {
 			labels,
 			datasets: [
 				{
 					label: 'Hours Spent',
-					data: data,
+					data: data, // Array of data points for the dataset
 					backgroundColor: 'rgba(75, 192, 192, 0.6)',
 					borderColor: 'rgba(75, 192, 192, 1)',
 					borderWidth: 1
@@ -89,7 +87,7 @@
 			},
 			scales: {
 				y: {
-					beginAtZero: true,
+					beginAtZero: true, // Start the y-axis at zero
 					title: {
 						display: true,
 						text: 'Hours'
@@ -97,8 +95,6 @@
 				}
 			}
 		};
-
-		console.log('Final chartData:', chartData); // Debug log
 	}
 </script>
 

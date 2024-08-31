@@ -108,9 +108,8 @@
 		grid-template-areas:
 			'name name'
 			'duration datetime';
-
-		gap: 1rem;
-		padding: 1.125rem;
+		gap: 0.5rem;
+		padding: 1rem;
 
 		cursor: pointer;
 		background-color: #f0f0f0;
@@ -122,6 +121,7 @@
 			grid-template-columns: repeat(4, 1fr);
 			grid-template-rows: 1fr;
 			grid-template-areas: 'name name duration datetime';
+			gap: 1rem;
 		}
 	}
 
@@ -159,6 +159,9 @@
 
 	.task-details {
 		padding: 1rem;
+	}
+	.task-details :global(p:first-child){
+		margin-top: 0;
 	}
 	.duration {
 		text-align: left;

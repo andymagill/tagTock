@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-	import { formatTime } from '../utils/timeUtils';
+	import { formatTime, getTImerHTML } from '../utils/timeUtils';
 	import { horizontalSlide } from '../utils/transitions';
 
 	export let elapsedTime: number;
@@ -17,60 +17,69 @@
 	});
 
 	$: displayedTime.set(elapsedTime);
-
 </script>
 
 <div class="timer-container">
 	<div class="timer-display">
-		<time datetime={formatTime($displayedTime)}>{formatTime($displayedTime)}</time>
+		<time datetime={formatTime($displayedTime)}>{@html getTImerHTML($displayedTime)}</time>
 	</div>
 
 	<div class="timer-controls">
-		{#if isRunning}
-			<button
-				class="button"
-				on:click={pauseTimer}
-				transition:horizontalSlide={{ axis: 'x', duration: 300 }}
-			>
-				<i class="fas fa-pause"></i> Pause
-			</button>
-		{:else}
-			<button
-				class="button start"
-				on:click={startTimer}
-				transition:horizontalSlide={{ axis: 'x', duration: 300 }}
-			>
-				<i class="fas fa-play"></i> Start
-			</button>
-		{/if}
+		<button class="button start" on:click={startTimer} disabled={isRunning}>
+			<i class="fas fa-play"></i>&nbsp;
+			<span>Start</span>
+		</button>
+
+		<button class="button pause" on:click={pauseTimer} disabled={!isRunning}>
+			<i class="fas fa-pause"></i>&nbsp;
+			<span>Pause</span>
+		</button>
+
 		<button class="button reset" on:click={resetTimer} disabled={!canReset}>
-			<i class="fas fa-undo"></i> Reset
+			<i class="fas fa-undo"></i>&nbsp;
+			<span>Reset</span>
 		</button>
 	</div>
 </div>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
+
 	.timer-container {
 		/* flex: 1; */
 		min-width: 44%;
 	}
-
 	.timer-display {
 		text-align: center;
 		margin-bottom: 2rem;
 	}
-
 	.timer-display time {
-		display: block;
-		font-size: clamp(48px, 8vw, 64px);
+		display: flex;
+		font-size: 4rem;
 		line-height: 1em;
-		padding: 1rem;
 		border-radius: 8px;
+		font-family: 'Noto Sans Mono', monospace;
+		font-weight: 300;
+		margin: auto;
+		width: max-content;
 	}
-
+	@media (min-width: 480px) {
+		.timer-display time {
+			font-size: clamp(3rem, 8vw, 4rem);
+		}
+	}
+	.timer-display :global(span:not(:last-child)::after) {
+		content: ':';
+		display: inline-block;
+		width: 1rem;
+		position: relative;
+		left: -0.15em;
+	}
 	.timer-controls {
 		display: flex;
 		justify-content: center;
+		flex-wrap: wrap;
 		gap: 0.75rem;
+		margin-bottom: 1em;
 	}
 </style>
