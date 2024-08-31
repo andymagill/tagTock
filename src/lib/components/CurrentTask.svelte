@@ -98,18 +98,14 @@
 		<TagSelector {selectedTags} {availableTags} on:change={handleTagChange} />
 
 		<div class="task-actions">
-			<button class="button archive" 
-				on:click={archiveTask} disabled={!canArchive}
-			>
-				<i class="fas fa-save"></i>&nbsp;
-				Archive
+			<button class="button archive" on:click={archiveTask} disabled={!canArchive}>
+				<i class="fas fa-save"></i>&nbsp; Archive
 			</button>
 		</div>
 	</div>
 </section>
 
 <style>
-
 	.current-task {
 		display: flex;
 		flex-direction: column;
@@ -124,12 +120,10 @@
 	}
 	.task-controls {
 		flex-grow: 1;
-		
 	}
 	.task-actions {
 		display: flex;
 		justify-content: flex-end;
 		gap: 1rem;
 	}
-
 </style>

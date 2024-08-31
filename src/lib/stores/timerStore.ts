@@ -67,7 +67,12 @@ function createTimerStore() {
 				return state;
 			}),
 		resetTimer: () => {
-			const resetState = { ...initialState, lastUpdated: Date.now() };
+			const resetState = {
+				...initialState,
+				lastUpdated: Date.now(),
+				startTime: Date.now(),
+				elapsedTime: 0
+			};
 			set(resetState);
 			saveTimerState(resetState);
 		},

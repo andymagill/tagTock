@@ -32,8 +32,9 @@
 
 	<div class="timer-controls">
 		{#if isRunning}
-			<button class="button"
-				on:click={pauseTimer} 
+			<button
+				class="button"
+				on:click={pauseTimer}
 				transition:horizontalSlide={{ axis: 'x', duration: 300 }}
 			>
 				<i class="fas fa-pause"></i> Pause
@@ -47,10 +48,7 @@
 				<i class="fas fa-play"></i> Start
 			</button>
 		{/if}
-		<button class="button reset"
-			on:click={resetTimer}
-			disabled={!canReset}
-		>
+		<button class="button reset" on:click={resetTimer} disabled={!canReset}>
 			<i class="fas fa-undo"></i> Reset
 		</button>
 	</div>

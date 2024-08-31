@@ -24,6 +24,7 @@ input,
 select,
 textarea {
 	font-family: inherit;
+	font-size: inherit;
 }
 .app {
 	position: relative;
