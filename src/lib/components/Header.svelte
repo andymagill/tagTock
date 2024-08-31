@@ -55,6 +55,7 @@
 		align-items: center;
 		text-decoration: none;
 		gap: 0.5em;
+		color: inherit;
 	}
 
 	.wrapper {
@@ -83,7 +84,7 @@
 		text-decoration: none;
 	}
 
-	nav a:hover {
+	nav a:hover span {
 		text-decoration: underline;
 	}
 </style>

@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { horizontalSlide } from '../utils/transitions';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
+	import { formatTime } from '../utils/timeUtils';
+	import { horizontalSlide } from '../utils/transitions';
 
 	export let elapsedTime: number;
 	export let isRunning: boolean;
@@ -17,12 +18,6 @@
 
 	$: displayedTime.set(elapsedTime);
 
-	function formatTime(ms: number): string {
-		const seconds = Math.floor(ms / 1000) % 60;
-		const minutes = Math.floor(ms / (1000 * 60)) % 60;
-		const hours = Math.floor(ms / (1000 * 60 * 60));
-		return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-	}
 </script>
 
 <div class="timer-container">
