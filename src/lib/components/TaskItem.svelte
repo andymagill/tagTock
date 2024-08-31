@@ -72,11 +72,11 @@
 			<p><strong>Tags:</strong> {task.tags.join(', ') || 'No tags'}</p>
 			<p><strong>Created:</strong> {formatDateLong(task.createdAt)}</p>
 			<div class="task-actions">
-				<button on:click={confirmCopy}>
+				<button class="button" on:click={confirmCopy}>
 					<i class="fas fa-copy"></i>&nbsp;
 					<span>Copy</span>
 				</button>
-				<button class="delete" on:click={confirmDelete}>
+				<button class="button delete" on:click={confirmDelete}>
 					<i class="fas fa-remove"></i>&nbsp;
 					<span>Delete</span>
 				</button>
@@ -168,21 +168,5 @@
 		justify-content: flex-end;
 		gap: 0.5rem;
 		margin-top: 1rem;
-	}
-
-	.task-actions button {
-		padding: 0.5rem 1rem;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-		background-color: #1387cf;
-		color: white;
-	}
-	.task-actions .delete {
-		background-color: #ff0059;
-	}
-
-	.task-actions button:hover {
-		background-color: #0056b3;
 	}
 </style>

@@ -98,14 +98,17 @@
 		<TagSelector {selectedTags} {availableTags} on:change={handleTagChange} />
 
 		<div class="task-actions">
-			<button class="archive" on:click={archiveTask} disabled={!canArchive}>Archive</button>
+			<button class="button archive" 
+				on:click={archiveTask} disabled={!canArchive}
+			>
+				<i class="fas fa-save"></i>&nbsp;
+				Archive
+			</button>
 		</div>
 	</div>
 </section>
 
 <style>
-	section {
-	}
 
 	.current-task {
 		display: flex;
@@ -121,6 +124,7 @@
 	}
 	.task-controls {
 		flex-grow: 1;
+		
 	}
 	.task-actions {
 		display: flex;
@@ -128,24 +132,4 @@
 		gap: 1rem;
 	}
 
-	button {
-		padding: 0.5rem 1rem;
-		font-size: 1rem;
-		cursor: pointer;
-		background-color: #1387cf;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		transition: background-color 0.3s ease;
-		white-space: nowrap;
-	}
-
-	button:hover:not(:disabled) {
-		background-color: #0056b3;
-	}
-
-	button:disabled {
-		background-color: #ccc;
-		cursor: not-allowed;
-	}
 </style>

@@ -32,19 +32,25 @@
 
 	<div class="timer-controls">
 		{#if isRunning}
-			<button on:click={pauseTimer} transition:horizontalSlide={{ axis: 'x', duration: 300 }}>
+			<button class="button"
+				on:click={pauseTimer} 
+				transition:horizontalSlide={{ axis: 'x', duration: 300 }}
+			>
 				<i class="fas fa-pause"></i> Pause
 			</button>
 		{:else}
 			<button
-				class="start"
+				class="button start"
 				on:click={startTimer}
 				transition:horizontalSlide={{ axis: 'x', duration: 300 }}
 			>
 				<i class="fas fa-play"></i> Start
 			</button>
 		{/if}
-		<button class="reset" on:click={resetTimer} disabled={!canReset}>
+		<button class="button reset"
+			on:click={resetTimer}
+			disabled={!canReset}
+		>
 			<i class="fas fa-undo"></i> Reset
 		</button>
 	</div>
@@ -72,32 +78,6 @@
 	.timer-controls {
 		display: flex;
 		justify-content: center;
-		gap: 0.5rem;
-	}
-
-	button {
-		padding: 0.5rem 1rem;
-		font-size: 1rem;
-		cursor: pointer;
-		background-color: #1387cf;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		transition: background-color 0.3s ease;
-		white-space: nowrap;
-	}
-	.start {
-		background-color: #6c9f1b;
-	}
-	.reset {
-		background-color: #dc3545;
-	}
-	button:hover:not(:disabled) {
-		background-color: #453e4c;
-	}
-
-	button:disabled {
-		background-color: #ccc;
-		cursor: not-allowed;
+		gap: 0.75rem;
 	}
 </style>

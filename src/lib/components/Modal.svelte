@@ -22,8 +22,8 @@
 			<h2>{title}</h2>
 			<p>{message}</p>
 			<div class="modal-actions">
-				<button on:click={close}>Cancel</button>
-				<button on:click={confirm}>Confirm</button>
+				<button class="button" on:click={close}>Cancel</button>
+				<button class="button" on:click={confirm}>Confirm</button>
 			</div>
 		</div>
 	</div>
@@ -60,13 +60,6 @@
 		justify-content: flex-end;
 		gap: 1rem;
 		margin-top: 1rem;
-	}
-
-	button {
-		padding: 0.5rem 1rem;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
 	}
 
 	button:first-child {
