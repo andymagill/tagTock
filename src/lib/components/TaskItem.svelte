@@ -160,7 +160,7 @@
 	.task-details {
 		padding: 1rem;
 	}
-	.task-details :global(p:first-child){
+	.task-details :global(p:first-child) {
 		margin-top: 0;
 	}
 	.duration {

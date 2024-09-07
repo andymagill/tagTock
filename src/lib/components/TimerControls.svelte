@@ -2,6 +2,7 @@
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
 	import { formatTime, getTImerHTML } from '../utils/timeUtils';
+	import StopWatch from './StopWatch.svelte';
 	import { horizontalSlide } from '../utils/transitions';
 
 	export let elapsedTime: number;
@@ -11,7 +12,7 @@
 	export let pauseTimer: () => void;
 	export let resetTimer: () => void;
 
-	const displayedTime = tweened(0, {
+	export let displayedTime = tweened(0, {
 		duration: 1250,
 		easing: cubicOut
 	});
@@ -20,7 +21,12 @@
 </script>
 
 <div class="timer-container">
+	<div class="watch-container">
+		<StopWatch elapsedTime={$displayedTime} />
+	</div>
+
 	<div class="timer-display">
+
 		<time datetime={formatTime($displayedTime)}>{@html getTImerHTML($displayedTime)}</time>
 	</div>
 
@@ -62,6 +68,11 @@
 		font-weight: 300;
 		margin: auto;
 		width: max-content;
+		text-shadow: -0.2rem -0.2rem 0 var(--background-color), 
+			0.2rem -0.2rem 0 var(--background-color), 
+			-0.2rem 0.2rem 0 var(--background-color), 
+			0.2rem 0.2rem 0 var(--background-color)
+		;
 	}
 	@media (min-width: 480px) {
 		.timer-display time {
