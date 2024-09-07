@@ -63,7 +63,7 @@
 		display: flex;
 		font-size: 4rem;
 		line-height: 1em;
-		border-radius: 8px;
+		border-radius: .25rem;
 		font-family: 'Noto Sans Mono', monospace;
 		font-weight: 300;
 		margin: auto;

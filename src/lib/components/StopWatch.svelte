@@ -87,15 +87,12 @@
 			&.sixty {
 				top: 5%;
 			}
-
 			&.fifteen {
 				right: 5%;
 			}
-
 			&.thirty {
 				bottom: 5%;
 			}
-
 			&.fortyfive {
 				left: 5%;
 			}
@@ -111,19 +108,19 @@
 
 			&.second {
 				background-color: #6d605a;
-				height: 45%;
+				height: 42%;
 				width: 2px;
 			}
 
 			&.minute {
 				background-color: #51665e;
-				height: 30%;
+				height: 36%;
 				width: 3px;
 			}
 
 			&.hour {
 				background-color: #3e3e53;
-				height: 25%;
+				height: 24%;
 				width: 4px;
 			}
 		}
