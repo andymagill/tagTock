@@ -42,10 +42,10 @@
 		--clock-sixtieth-marks: #ccc;
 		--second-labels: #333;
 	}
-    .stopwatch{
-        max-width: 75%;
-        margin: 0 auto;
-    }
+	.stopwatch {
+		max-width: 75%;
+		margin: 0 auto;
+	}
 
 	.clock {
 		align-items: center;
@@ -54,7 +54,7 @@
 		margin-bottom: 20px;
 		position: relative;
 		width: 100%;
-        aspect-ratio: 1 / 1;
+		aspect-ratio: 1 / 1;
 
 		&::before {
 			content: '';

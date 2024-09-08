@@ -26,7 +26,6 @@
 	</div>
 
 	<div class="timer-display">
-
 		<time datetime={formatTime($displayedTime)}>{@html getTImerHTML($displayedTime)}</time>
 	</div>
 
@@ -63,16 +62,16 @@
 		display: flex;
 		font-size: 4rem;
 		line-height: 1em;
-		border-radius: .25rem;
+		border-radius: 0.25rem;
 		font-family: 'Noto Sans Mono', monospace;
 		font-weight: 300;
 		margin: auto;
 		width: max-content;
-		text-shadow: -0.2rem -0.2rem 0 var(--background-color), 
-			0.2rem -0.2rem 0 var(--background-color), 
-			-0.2rem 0.2rem 0 var(--background-color), 
-			0.2rem 0.2rem 0 var(--background-color)
-		;
+		text-shadow:
+			-0.2rem -0.2rem 0 var(--background-color),
+			0.2rem -0.2rem 0 var(--background-color),
+			-0.2rem 0.2rem 0 var(--background-color),
+			0.2rem 0.2rem 0 var(--background-color);
 	}
 	@media (min-width: 480px) {
 		.timer-display time {
