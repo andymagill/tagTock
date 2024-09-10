@@ -41,7 +41,6 @@
 
 <style>
 	.header {
-		padding: 0.5rem 1rem;
 		text-align: center;
 	}
 	.h1 {
@@ -63,6 +62,8 @@
 		justify-content: space-between;
 		align-items: center;
 		flex-direction: column;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
 	}
 
 	@media (min-width: 480px) {

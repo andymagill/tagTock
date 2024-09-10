@@ -8,17 +8,14 @@
 </svelte:head>
 
 <main>
-	<h1>{$config.appDescription}</h1>
-	<CurrentTask />
+	<div class="wrapper">
+		<h1>{$config.appDescription}</h1>
+		<CurrentTask />
+	</div>
 </main>
 
 <style>
-	main {
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 1rem;
-	}
-	h1 {
+	.wrapper h1 {
 		display: none;
 	}
 </style>
