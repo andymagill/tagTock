@@ -1,32 +1,51 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-	import { formatTime, getTImerHTML } from '../utils/timeUtils';
+	import { formatTime, getTimerHTML, convertDuration } from '../utils/timeUtils';
 	import StopWatch from './StopWatch.svelte';
 	import { horizontalSlide } from '../utils/transitions';
 
-	export let elapsedTime: number;
 	export let isRunning: boolean;
 	export let canReset: boolean;
 	export let startTimer: () => void;
 	export let pauseTimer: () => void;
 	export let resetTimer: () => void;
 
-	export let displayedTime = tweened(0, {
-		duration: 1250,
-		easing: cubicOut
+	export let elapsedTime: number;
+
+	export let durationArray = convertDuration(elapsedTime);
+	onMount(async () => {
+		durationArray = convertDuration(elapsedTime);
 	});
 
-	$: displayedTime.set(elapsedTime);
+	const hours = tweened(0, { duration: 250, easing: cubicOut });
+	const minutes = tweened(0, { duration: 250, easing: cubicOut });
+	const seconds = tweened(0, { duration: 250, easing: cubicOut });
+
+	// Update the tweened values when elapsedTime changes
+	$: {
+		const durationArray = convertDuration(elapsedTime);
+		hours.set(Math.floor(Number(durationArray[0])));
+		minutes.set(Math.floor(Number(durationArray[1])));
+		seconds.set(Math.floor(Number(durationArray[2])));
+	}
+
+	// Update the tweened value when elapsedTime changes
+	$: durationArray = convertDuration(elapsedTime);
 </script>
 
 <div class="timer-container">
 	<div class="watch-container">
-		<StopWatch elapsedTime={$displayedTime} />
+		<StopWatch {elapsedTime} />
 	</div>
 
 	<div class="timer-display">
-		<time datetime={formatTime($displayedTime)}>{@html getTImerHTML($displayedTime)}</time>
+		<time datetime={elapsedTime.toString()}>
+			<span>{Number($hours).toFixed(0).toString().padStart(2, '0')}</span>
+			<span>{Number($minutes).toFixed(0).toString().padStart(2, '0')}</span>
+			<span>{Number($seconds).toFixed(0).toString().padStart(2, '0')}</span>
+		</time>
 	</div>
 
 	<div class="timer-controls">
@@ -48,10 +67,9 @@
 </div>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 	.timer-container {
-		/* flex: 1; */
 		min-width: 44%;
 	}
 	.timer-display {
@@ -63,8 +81,8 @@
 		font-size: 4rem;
 		line-height: 1em;
 		border-radius: 0.25rem;
-		font-family: 'Noto Sans Mono', monospace;
-		font-weight: 300;
+		font-family: 'Roboto Mono', 'Consolas', 'Courier New', monospace;
+		font-weight: 200;
 		margin: auto;
 		width: max-content;
 		text-shadow:
@@ -78,12 +96,12 @@
 			font-size: clamp(3rem, 8vw, 4rem);
 		}
 	}
+
 	.timer-display :global(span:not(:last-child)::after) {
+		font-family: sans-serif;
 		content: ':';
-		display: inline-block;
-		width: 1rem;
-		position: relative;
-		left: -0.15em;
+		vertical-align: top;
+		font-size: 70%;
 	}
 	.timer-controls {
 		display: flex;

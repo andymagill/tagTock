@@ -1,5 +1,11 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	export let elapsedTime: number = 0;
+
+	let showHands = false;
+	onMount(() => {
+		showHands = true;
+	});
 
 	$: hourRotation = calculateHourRotation(elapsedTime);
 	$: minutesRotation = calculateMinuteRotation(elapsedTime);
@@ -23,9 +29,27 @@
 
 <section class="stopwatch">
 	<div class="clock">
-		<div class="hand hour" style={`transform: translateX(-50%) rotate(${hourRotation}deg)`} />
-		<div class="hand minute" style={`transform: translateX(-50%) rotate(${minutesRotation}deg)`} />
-		<div class="hand second" style={`transform: translateX(-50%) rotate(${secondsRotation}deg)`} />
+		<div
+			class="hand hour"
+			style={`
+			height: ${showHands ? '26%' : '0'};
+			transform: translateX(-50%) rotate(${hourRotation}deg);
+		`}
+		/>
+		<div
+			class="hand minute"
+			style={`
+			height: ${showHands ? '32%' : '0'};
+			transform: translateX(-50%) rotate(${minutesRotation}deg)
+		`}
+		/>
+		<div
+			class="hand second"
+			style={`
+			height: ${showHands ? '42%' : '0'};
+			transform: translateX(-50%) rotate(${secondsRotation}deg)
+		`}
+		/>
 
 		<span class="second-labels fifteen">15</span>
 		<span class="second-labels thirty">30</span>
@@ -99,11 +123,12 @@
 		}
 		& .hand {
 			bottom: 50%;
-			height: 30%;
+			height: 0;
 			left: 50%;
 			position: absolute;
 			transform: translateX(-50%) rotate(0deg);
 			transform-origin: bottom;
+			transition: height 0.25s ease-out;
 			width: 3px;
 
 			&.second {
@@ -114,13 +139,13 @@
 
 			&.minute {
 				background-color: #51665e;
-				height: 36%;
+				height: 32%;
 				width: 3px;
 			}
 
 			&.hour {
 				background-color: #3e3e53;
-				height: 24%;
+				height: 26%;
 				width: 4px;
 			}
 		}
