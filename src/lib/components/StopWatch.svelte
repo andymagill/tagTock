@@ -32,14 +32,14 @@
 		<div
 			class="hand hour"
 			style={`
-			height: ${showHands ? '26%' : '0'};
+			height: ${showHands ? '24%' : '0'};
 			transform: translateX(-50%) rotate(${hourRotation}deg);
 		`}
 		/>
 		<div
 			class="hand minute"
 			style={`
-			height: ${showHands ? '32%' : '0'};
+			height: ${showHands ? '31%' : '0'};
 			transform: translateX(-50%) rotate(${minutesRotation}deg)
 		`}
 		/>
@@ -67,7 +67,7 @@
 		--second-labels: #333;
 	}
 	.stopwatch {
-		max-width: 75%;
+		width: clamp(180px, 75%, 320px);
 		margin: 0 auto;
 	}
 
@@ -139,13 +139,13 @@
 
 			&.minute {
 				background-color: #51665e;
-				height: 32%;
+				height: 31%;
 				width: 3px;
 			}
 
 			&.hour {
 				background-color: #3e3e53;
-				height: 26%;
+				height: 24%;
 				width: 4px;
 			}
 		}

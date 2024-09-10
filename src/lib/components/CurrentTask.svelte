@@ -110,7 +110,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		padding: 1rem;
 	}
 
 	@media (min-width: 480px) {

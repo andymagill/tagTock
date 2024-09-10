@@ -19,9 +19,9 @@
 		durationArray = convertDuration(elapsedTime);
 	});
 
-	const hours = tweened(0, { duration: 250, easing: cubicOut });
-	const minutes = tweened(0, { duration: 250, easing: cubicOut });
-	const seconds = tweened(0, { duration: 250, easing: cubicOut });
+	const hours = tweened(0, { duration: 800, easing: cubicOut });
+	const minutes = tweened(0, { duration: 800, easing: cubicOut });
+	const seconds = tweened(0, { duration: 800, easing: cubicOut });
 
 	// Update the tweened values when elapsedTime changes
 	$: {
@@ -70,7 +70,7 @@
 	@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 	.timer-container {
-		min-width: 44%;
+		min-width: 40%;
 	}
 	.timer-display {
 		text-align: center;
@@ -78,7 +78,7 @@
 	}
 	.timer-display time {
 		display: flex;
-		font-size: 4rem;
+		font-size: clamp(3rem, 7vw, 4.2rem);
 		line-height: 1em;
 		border-radius: 0.25rem;
 		font-family: 'Roboto Mono', 'Consolas', 'Courier New', monospace;
@@ -90,11 +90,6 @@
 			0.2rem -0.2rem 0 var(--background-color),
 			-0.2rem 0.2rem 0 var(--background-color),
 			0.2rem 0.2rem 0 var(--background-color);
-	}
-	@media (min-width: 480px) {
-		.timer-display time {
-			font-size: clamp(3rem, 8vw, 4rem);
-		}
 	}
 
 	.timer-display :global(span:not(:last-child)::after) {
