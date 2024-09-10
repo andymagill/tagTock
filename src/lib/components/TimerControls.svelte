@@ -78,7 +78,7 @@
 	}
 	.timer-display time {
 		display: flex;
-		font-size: clamp(3rem, 7vw, 4.2rem);
+		font-size: clamp(3rem, 7vw, 4.4rem);
 		line-height: 1em;
 		border-radius: 0.25rem;
 		font-family: 'Roboto Mono', 'Consolas', 'Courier New', monospace;
